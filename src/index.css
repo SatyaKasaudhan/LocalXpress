@@ -1,0 +1,439 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-input: #f1f5f9;
+  --bg-popover: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --border-color: #e2e8f0;
+  --border-muted: #f1f5f9;
+}
+
+.dark {
+  --bg-app: #030712;
+  --bg-card: #0f172a;
+  --bg-input: #1e293b;
+  --bg-popover: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  --border-muted: #1e293b;
+  color-scheme: dark;
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --color-brand: #FF6321;
+  --color-brand-orange: #FF6321;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    @apply antialiased font-sans select-none transition-colors duration-200;
+  }
+}
+
+/* Global Dark Mode Overrides for Tailwind Light Classes */
+.dark body {
+  background-color: var(--bg-app) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark .bg-neutral-50 {
+  background-color: var(--bg-app) !important;
+}
+
+.dark .bg-neutral-100 {
+  background-color: var(--bg-app) !important;
+}
+
+.dark .bg-white {
+  background-color: var(--bg-card) !important;
+}
+
+.dark .text-neutral-900 {
+  color: var(--text-primary) !important;
+}
+
+.dark .text-neutral-800 {
+  color: var(--text-primary) !important;
+}
+
+.dark .text-neutral-700 {
+  color: var(--text-secondary) !important;
+}
+
+.dark .text-neutral-600 {
+  color: var(--text-secondary) !important;
+}
+
+.dark .border-neutral-200 {
+  border-color: var(--border-color) !important;
+}
+
+.dark .border-neutral-100 {
+  border-color: var(--border-muted) !important;
+}
+
+.dark .divide-neutral-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border-muted) !important;
+}
+
+.dark .divide-neutral-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border-color) !important;
+}
+
+.dark .bento-card {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark .bento-card:hover {
+  border-color: var(--border-color) !important;
+  background-color: var(--bg-input) !important;
+}
+
+.dark input, .dark select, .dark textarea {
+  background-color: var(--bg-input) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark input::placeholder {
+  color: var(--text-secondary) !important;
+  opacity: 0.7 !important;
+}
+
+/* Headers / Sticky Navigation in Dark Mode */
+.dark header {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Bento Theme Custom Classes */
+.bento-card {
+  @apply bg-white border border-neutral-200 rounded-3xl p-6 shadow-xs transition-all duration-300;
+}
+
+.bento-card-dark {
+  @apply bg-neutral-900 border border-neutral-800 rounded-3xl p-6 shadow-md transition-all duration-300 text-white;
+}
+
+.bento-card:hover {
+  @apply border-neutral-300 shadow-sm transform -translate-y-0.5;
+}
+
+.bento-card-dark:hover {
+  @apply border-neutral-700 shadow-lg transform -translate-y-0.5;
+}
+
+.bento-badge {
+  @apply text-[10px] uppercase font-bold tracking-widest text-neutral-400 font-display;
+}
+
+.bento-title {
+  @apply font-display font-black tracking-tight text-neutral-900;
+}
+
+.bento-brand-title {
+  @apply font-display font-black tracking-tight text-[#FF6321];
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #e5e5e5;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4d4d4;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Compact receipt/invoice layout that centers on standard paper and perfectly fits thermal roll printers */
+  .print-invoice {
+    display: block !important;
+    width: 100% !important;
+    max-width: 80mm !important;
+    margin: 0 auto !important;
+    padding: 8px !important;
+    background: #fff !important;
+    color: #000 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Make sure standard non-printable elements don't show background artifacts */
+  * {
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  @page {
+    size: portrait;
+    margin: 4mm;
+  }
+
+  /* Prevent page breaks in small receipt structures */
+  .print-invoice-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-header {
+    text-align: center;
+    border-bottom: 1.5px dashed #000;
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+  }
+
+  .print-logo-box {
+    border: 2.5px solid #000 !important;
+    padding: 5px 12px !important;
+    font-family: "Space Grotesk", sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 22px !important;
+    letter-spacing: -0.05em !important;
+    display: inline-block !important;
+    margin-bottom: 6px !important;
+    text-transform: uppercase !important;
+    color: #000 !important;
+    line-height: 1 !important;
+  }
+
+  .print-title {
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+    color: #000 !important;
+  }
+
+  .print-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    font-size: 10px !important;
+    border-bottom: 1.5px dashed #000;
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+  }
+
+  .print-meta-col {
+    display: flex;
+    flex-col: column;
+  }
+
+  .print-meta-label {
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 8px !important;
+    color: #000 !important;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+
+  .print-meta-val {
+    font-size: 10px !important;
+    color: #000 !important;
+    line-height: 1.3;
+  }
+
+  .print-section-title {
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    font-size: 9px !important;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #000;
+    padding-bottom: 3px;
+    margin-bottom: 8px;
+    margin-top: 12px;
+    color: #000 !important;
+  }
+
+  .print-items-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 10px !important;
+    margin-bottom: 12px;
+  }
+
+  .print-items-table th {
+    border-bottom: 1px solid #000 !important;
+    text-transform: uppercase !important;
+    font-size: 8px !important;
+    font-weight: 800 !important;
+    padding: 4px 0 !important;
+    color: #000 !important;
+  }
+
+  .print-items-table td {
+    padding: 6px 0 !important;
+    vertical-align: top !important;
+    color: #000 !important;
+    line-height: 1.3;
+  }
+
+  .print-totals {
+    border-top: 1.5px dashed #000 !important;
+    padding-top: 8px !important;
+    font-size: 10px !important;
+  }
+
+  .print-totals-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    padding: 2.5px 0 !important;
+    color: #000 !important;
+  }
+
+  .print-totals-grand {
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    border-top: 1px solid #000 !important;
+    margin-top: 6px !important;
+    padding-top: 6px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    color: #000 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .print-footer {
+    text-align: center;
+    border-top: 1.5px dashed #000;
+    padding-top: 12px;
+    margin-top: 18px;
+    font-size: 8px !important;
+    line-height: 1.4;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: #000 !important;
+  }
+}
+
+/* Google Sign-In Material Button Standard compliance styles */
+.gsi-material-button {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-appearance: none;
+  background-color: WHITE;
+  background-image: none;
+  border: 1px solid #e2e8f0;
+  -webkit-border-radius: 14px;
+  border-radius: 14px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #1e293b;
+  cursor: pointer;
+  display: inline-block;
+  height: 42px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 16px;
+  position: relative;
+  text-align: center;
+  -webkit-transition: background-color .218s, border-color .218s, box-shadow .218s;
+  transition: background-color .218s, border-color .218s, box-shadow .218s;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
+  max-width: 400px;
+  min-width: min-content;
+}
+
+.gsi-material-button .gsi-material-button-icon {
+  height: 18px;
+  margin-right: 10px;
+  min-width: 18px;
+  width: 18px;
+}
+
+.gsi-material-button .gsi-material-button-content-wrapper {
+  -webkit-align-items: center;
+  align-items: center;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.gsi-material-button .gsi-material-button-contents {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.gsi-material-button .gsi-material-button-state {
+  -webkit-transition: opacity .218s;
+  transition: opacity .218s;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.gsi-material-button:hover {
+  -webkit-box-shadow: 0 1px 2px 0 rgba(60,64,67,.20), 0 1px 3px 1px rgba(60,64,67,.10);
+  box-shadow: 0 1px 2px 0 rgba(60,64,67,.20), 0 1px 3px 1px rgba(60,64,67,.10);
+  background-color: #f8fafc;
+}
+
+.gsi-material-button:hover .gsi-material-button-state {
+  background-color: #303030;
+  opacity: 0.02;
+}
+
+.gsi-material-button:focus {
+  border-color: #FF6321;
+}
+
+.gsi-material-button:active {
+  background-color: #f1f5f9;
+}
+

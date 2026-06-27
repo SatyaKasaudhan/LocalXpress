@@ -1,0 +1,144 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Store items available for delivery",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "unit": { "type": "string" },
+        "price": { "type": "number" },
+        "image": { "type": "string" },
+        "featured": { "type": "boolean" }
+      },
+      "required": ["id", "name", "category", "unit", "image"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "An order placed by a customer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "estimatedAmount": { "type": "number" },
+        "deliveryCharge": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string" },
+        "customerNotes": { "type": "string" },
+        "runnerId": { "type": "string" },
+        "runnerName": { "type": "string" },
+        "appliedDiscount": { "type": "number" },
+        "appliedOfferCode": { "type": "string" }
+      },
+      "required": ["id", "date", "time", "estimatedAmount", "deliveryCharge", "totalAmount", "status"]
+    },
+    "CustomerSummary": {
+      "title": "CustomerSummary",
+      "description": "Aggregated stats for a customer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "mobile": { "type": "string" },
+        "address": { "type": "string" },
+        "totalOrders": { "type": "number" },
+        "lastOrderDate": { "type": "string" }
+      },
+      "required": ["id", "name", "mobile", "address", "totalOrders", "lastOrderDate"]
+    },
+    "Vendor": {
+      "title": "Vendor",
+      "description": "Partner shop details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "shopName": { "type": "string" },
+        "ownerName": { "type": "string" },
+        "mobile": { "type": "string" },
+        "category": { "type": "string" },
+        "address": { "type": "string" },
+        "openingTime": { "type": "string" },
+        "closingTime": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "shopName", "ownerName", "mobile", "category", "address", "openingTime", "closingTime", "status"]
+    },
+    "Runner": {
+      "title": "Runner",
+      "description": "Delivery executive profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "mobile": { "type": "string" },
+        "status": { "type": "string" },
+        "assignedOrdersCount": { "type": "number" }
+      },
+      "required": ["id", "name", "mobile", "status", "assignedOrdersCount"]
+    },
+    "BroadcastMessage": {
+      "title": "BroadcastMessage",
+      "description": "System-wide announcment sent to app clients",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderName": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "type": { "type": "string" }
+      },
+      "required": ["id", "senderName", "title", "message", "createdAt", "type"]
+    },
+    "Offer": {
+      "title": "Offer",
+      "description": "Coupon codes and delivery campaigns",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "discountType": { "type": "string" },
+        "discountValue": { "type": "number" },
+        "minOrderValue": { "type": "number" },
+        "bannerColor": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "description", "discountType", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "products/{productId}": {
+      "schema": "Product",
+      "description": "Store products collection"
+    },
+    "orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer orders collection"
+    },
+    "customers/{customerId}": {
+      "schema": "CustomerSummary",
+      "description": "Customer database collection"
+    },
+    "vendors/{vendorId}": {
+      "schema": "Vendor",
+      "description": "Partner shops collection"
+    },
+    "runners/{runnerId}": {
+      "schema": "Runner",
+      "description": "Delivery runners database"
+    },
+    "broadcasts/{broadcastId}": {
+      "schema": "BroadcastMessage",
+      "description": "Store notification/broadcast alerts"
+    },
+    "offers/{offerId}": {
+      "schema": "Offer",
+      "description": "Active promo and discount codes"
+    }
+  }
+}
